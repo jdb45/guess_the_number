@@ -54,7 +54,12 @@ def main():
         print(result)
         #adjust result to include count and allow for the ending of the program
         if (result == correct+str(guessNum)+ ' tries!'):
-            break
+            print()
+            play_again = input("Would you like to play again? yes or no:")
+            if play_again.lower().startswith('y'):
+                main()
+            else:
+                break
 
 
 if __name__ == '__main__':
