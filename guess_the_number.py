@@ -1,6 +1,6 @@
 import random
 
-correct = 'you guessed correctly!'
+correct = 'you guessed correctly after '
 too_low = 'too low'
 too_high = 'too high'
 
@@ -27,10 +27,11 @@ def get_guess():
     return userInput
 
 
-def check_guess(guess, secret):
+def check_guess(guess, secret, guessNum):
     '''compare guess and secret, return string describing result of comparison'''
     if guess == secret:
-        return correct
+        #add count to user information
+        return correct+str(guessNum)+ ' tries!'
     if guess < secret:
         return too_low
     if guess > secret:
@@ -38,7 +39,8 @@ def check_guess(guess, secret):
 
 
 def main():
-
+    #initialize guess count variable
+    guessNum = 0
     (low, high) = configure_range()
     secret = generate_secret(low, high)
 
@@ -47,9 +49,14 @@ def main():
         guess = get_guess()
         result = check_guess(guess, secret)
 
+        #count guesses
+        guessNum += 1
+        guess = get_guess()
+        #send count with function call
+        result = check_guess(guess, secret, guessNum)
         print(result)
-
-        if result == correct:
+        #adjust result to include count and allow for the ending of the program
+        if (result == correct+str(guessNum)+ ' tries!'):
             break
 
 
