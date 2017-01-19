@@ -46,9 +46,6 @@ def main():
 
     while True:
 
-        guess = get_guess()
-        result = check_guess(guess, secret)
-
         #count guesses
         guessNum += 1
         guess = get_guess()
