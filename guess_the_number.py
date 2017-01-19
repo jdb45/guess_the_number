@@ -1,4 +1,5 @@
 import random
+import sys
 
 correct = 'you guessed correctly after '
 too_low = 'too low'
@@ -7,7 +8,21 @@ too_high = 'too high'
 
 def configure_range():
     '''Set the high and low values for the random number'''
-    return 1, 10
+    while True:
+        print ("What is the lowest number to be guessed?")
+        try:
+            low = int(input())
+            break
+        except:
+            print("Please enter an int")
+    while True:
+        print ("What is the highest number to be guessed?")
+        try:
+            high = int(input())
+            break
+        except:
+            print("Please enter an int")
+    return low, high
 
 
 def generate_secret(low, high):
@@ -59,6 +74,7 @@ def main():
             if play_again.lower().startswith('y'):
                 main()
             else:
+                sys.exit()
                 break
 
 
