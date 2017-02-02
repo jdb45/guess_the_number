@@ -5,6 +5,23 @@ correct = 'you guessed correctly after '
 too_low = 'too low'
 too_high = 'too high'
 
+def main():
+    #initialize guess count variable
+    guessNum = 0
+    (low, high) = configure_range()
+    secret = generate_secret(low, high)
+
+    while True:
+
+        #count guesses
+        guessNum += 1
+        guess = get_guess()
+        #send count with function call
+        result = check_guess(guess, secret, guessNum)
+        print(result)
+        #adjust result to include count and allow for the ending of the program
+        if (result == correct+str(guessNum)+ ' tries!'):
+            again()
 
 def configure_range():
     '''Set the high and low values for the random number'''
@@ -51,31 +68,16 @@ def check_guess(guess, secret, guessNum):
         return too_low
     if guess > secret:
         return too_high
+def again():
+    print()
+    play_again = input("Would you like to play again? yes or no:")
+    if play_again.lower().startswith('y'):
+        main()
+    else:
+        sys.exit()
 
 
-def main():
-    #initialize guess count variable
-    guessNum = 0
-    (low, high) = configure_range()
-    secret = generate_secret(low, high)
 
-    while True:
-
-        #count guesses
-        guessNum += 1
-        guess = get_guess()
-        #send count with function call
-        result = check_guess(guess, secret, guessNum)
-        print(result)
-        #adjust result to include count and allow for the ending of the program
-        if (result == correct+str(guessNum)+ ' tries!'):
-            print()
-            play_again = input("Would you like to play again? yes or no:")
-            if play_again.lower().startswith('y'):
-                main()
-            else:
-                sys.exit()
-                break
 
 
 if __name__ == '__main__':
